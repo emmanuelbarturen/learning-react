@@ -1,36 +1,39 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {DrawerNavigator} from 'react-navigation'
+import {StyleSheet, Image, View} from 'react-native';
+import { createStackNavigator, createAppContainer } from "react-navigation";
+import HomeScreen from './screens/HomeScreen'
+import SettingScreen from './screens/SettingScreen'
+/*import {Container, Header, Body, Content} from 'native-base'*/
 
-type Props = {};
-export default class App extends Component<Props> {
+ class App extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text style={styles.welcome}>Menú</Text>
-                <Text style={styles.instructions}>Estilo hamburguesa.</Text>
-                <Text>mola</Text>
-            </View>
+            <AppNavigator/>
         );
     }
 }
 
-const myApp = DrawerNavigator({
+const AppNavigator = createStackNavigator({
     Home: {
         screen: HomeScreen
-    },
-    Settings: {
-        screen: SettingScreen
     }
 });
+export default createAppContainer(AppNavigator);
+/*customize left menu*/
+/*const CustomDrawerContentComponent = (props) => (
+    <Container>
+        <Header style={{height: 200, backgroundColor: 'red'}}>
+            <Body>
+                <Image
+                    style={styles.drawerImage}
+                    source={require('./assets/React_logo.png')}/>
+            </Body>
+        </Header>
+        <Content>
+            <DrawerItems {...props}/>
+        </Content>
+    </Container>
+);*/
 
 const styles = StyleSheet.create({
     container: {
@@ -50,4 +53,9 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5,
     },
+    drawerImage: {
+        height: 150,
+        width: 150,
+        borderRadius: 75
+    }
 });
